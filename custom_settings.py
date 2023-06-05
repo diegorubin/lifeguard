@@ -11,6 +11,14 @@ settings_manager = SettingsManager(
             "default": "",
             "description": "Api token of status notification service",
         },
+        "API_USERNAME": {
+            "default": "",
+            "description": "Username to access lifeguard",
+        },
+        "API_PASSWORD": {
+            "default": "",
+            "description": "Password to access lifeguard",
+        },
     }
 )
 
@@ -20,3 +28,6 @@ STATUS_NOTIFICATION_SERVICE = settings_manager.read_value("STATUS_NOTIFICATION_S
 STATUS_NOTIFICATION_SERVICE_API_TOKEN = settings_manager.read_value(
     "STATUS_NOTIFICATION_SERVICE_API_TOKEN"
 )
+
+API_USERNAME = settings_manager.read_value("API_USERNAME")
+API_PASSWORD = settings_manager.read_value("API_PASSWORD")
