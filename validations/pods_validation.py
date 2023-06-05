@@ -11,6 +11,7 @@ from lifeguard_k8s.validations.pods import pods_validation
     schedule={"every": {"minutes": 1}},
     settings={
         "notification": {
+            "update_thread_interval": 3600,
             "template": """{%- if pods %}
 There are {{ pods | length }} pod(s) not running:
 {%- for pod in pods %}
@@ -18,7 +19,7 @@ There are {{ pods | length }} pod(s) not running:
 {%- endfor %}
 {% else %}
 All pods are running!
-{%- endif %}"""
+{%- endif %}""",
         }
     },
 )
