@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python3 -i console-startup.py
