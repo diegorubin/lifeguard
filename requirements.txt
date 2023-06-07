@@ -1,4 +1,5 @@
 lifeguard==1.1.0
 lifeguard-mongodb==1.1.0
 lifeguard-telegram==1.1.0
-lifeguard-k8s==1.0.0
+lifeguard-k8s==1.1.0
+lifeguard-openai==1.0.1
