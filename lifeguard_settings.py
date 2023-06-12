@@ -5,7 +5,7 @@ import lifeguard_simple_dashboard
 from lifeguard.auth import BASIC_AUTH_METHOD
 from custom_settings import API_USERNAME, API_PASSWORD
 
-PLUGINS = [lifeguard_telegram, lifeguard_mongodb, lifeguard_simple_dashboard]
+PLUGINS = [lifeguard_mongodb, lifeguard_telegram, lifeguard_simple_dashboard]
 
 
 def setup(lifeguard_context):
