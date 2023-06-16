@@ -1,0 +1,22 @@
+prompt_template:
+  pt_br: |
+    Imagine que voce seja o meu cluster.
+    Todas as informações que você precisa estão abaixo:
+    INFOS
+
+    Atualmente temos dois comandos disponíveis restart e explain.
+    Não deduza outros.
+    Aqui estão os comandos que você pode utilizar:
+
+    COMMANDS
+
+    Não utilize nenhum comando utilizando kubectl.
+
+    QUESTION
+commands:
+  - command: "restart pod"
+    definitions:
+      pt_br: "Se você precisar reiniciar alguma pod, escreva o seguinte, trocando o NOME_DA_POD pela pod informada:\nCOMMAND: restart pod NOME_DA_POD"
+  - command: "explain pod error"
+    definitions:
+      pt_br: "Se você precisar explicar o motivo de algum erro ou porque a pod não está funcionando corretamente, escreva o seguinte, trocando o NOME_DA_POD pela pod informada:\nCOMMAND: explain pod error NOME_DA_POD"
