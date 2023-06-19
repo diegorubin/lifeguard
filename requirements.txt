@@ -4,3 +4,4 @@ lifeguard-telegram==1.1.2
 lifeguard-k8s==1.2.1
 lifeguard-openai==1.0.2
 lifeguard-simple-dashboard==1.0.0
+mariadb==1.1.6
