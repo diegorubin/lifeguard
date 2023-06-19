@@ -20,7 +20,7 @@ from custom_settings import (
 )
 
 current_directory = dirname(abspath(__file__))
-with open(join(current_directory, "cluster.yaml")) as file:
+with open(join(current_directory, "personal.yaml")) as file:
     CONTEXT = yaml.load(file, Loader=yaml.FullLoader)
 
 
