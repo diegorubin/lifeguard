@@ -1,0 +1,21 @@
+discover_dates_prompt_template:
+  pt_br: |
+    Dado o texto abaixo, liste para mim todas as datas relacionadas, dia por dia, linha por linha, sabendo que hoje é TODAY.
+    O resultado deve seguir o exemplo abaixo:
+    2021-01-01
+    2021-01-02
+
+    A reposta não deve ser nada diferente de uma lista de datas.
+
+    Extraia as dados conforme exemplo do texto abaixo:
+    QUESTION
+
+prompt_template:
+  pt_br: |
+    Se comporte como meu assistente pessoal.
+    Dado as seguintes informações:
+    INFOS
+
+    Me responda as seguintes perguntas:
+    QUESTION
+

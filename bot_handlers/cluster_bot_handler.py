@@ -13,21 +13,13 @@ from lifeguard_k8s.infrastructure.pods import (
 )
 from lifeguard_openai.infrastructure.prompt import execute_prompt
 
-from custom_settings import BOT_VALID_CHATS, PROMPT_LANG
+from bot_handlers import valid_request
+from custom_settings import PROMPT_LANG
 
 
 current_directory = dirname(abspath(__file__))
 with open(join(current_directory, "cluster.yaml")) as file:
     CONTEXT = yaml.load(file, Loader=yaml.FullLoader)
-
-
-def valid_request(update):
-    context = update.message.to_dict()
-    logger.info("chat id: %s", context["chat"]["id"])
-    if str(context["chat"]["id"]) not in BOT_VALID_CHATS:
-        logger.warn("unauthorized request %s", context)
-        return False
-    return True
 
 
 def restart_pod(update, pod_name):
@@ -39,9 +31,9 @@ def restart_pod(update, pod_name):
 def explain_pod_error(update, pod_name):
     logger.info("explain pod error %s", pod_name)
     response = execute_prompt(
-        f"""Dado o erro abaixo, explique o motivo, por favor:
-{get_last_error_event_from_pod("diegorubindev", pod_name)}
-        """
+        CONTEXT["explain_pod_error_prompt_template"][PROMPT_LANG].replace(
+            "ERROR", get_last_error_event_from_pod("diegorubindev", pod_name)
+        )
     )
     update.message.reply_text(response)
 
