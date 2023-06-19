@@ -1,6 +1,10 @@
 FROM python:3.7-buster
 
-RUN apt-get update
+RUN curl -LsS -O https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
+RUN bash mariadb_repo_setup --mariadb-server-version=10.9
+
+RUN apt-get update -y
+RUN apt-get upgrade -y
 
 RUN mkdir /application
 WORKDIR /application
