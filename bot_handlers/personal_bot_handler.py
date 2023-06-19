@@ -43,7 +43,7 @@ def cluster(update, _context):
     response = execute_prompt(
         CONTEXT["discover_dates_prompt_template"][PROMPT_LANG]
         .replace("QUESTION", question)
-        .replalce("TODAY", today)
+        .replace("TODAY", today)
     )
 
     logger.info("response days: %s", response)
