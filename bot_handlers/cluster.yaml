@@ -1,3 +1,8 @@
+explain_pod_error_prompt_template:
+  pt_br: |
+    Dado o erro abaixo, explique o motivo, por favor:
+
+    ERROR
 prompt_template:
   pt_br: |
     Imagine que voce seja o meu cluster.
