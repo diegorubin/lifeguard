@@ -6,8 +6,9 @@ from os.path import join, abspath, dirname
 from lifeguard.logger import lifeguard_logger as logger
 from lifeguard_telegram.bot import bot_handler
 
+from lifeguard_k8s.infrastructure.namespaces import get_namespace_infos
+from lifeguard_k8s.infrastructure.deployments import scale_a_deployment
 from lifeguard_k8s.infrastructure.pods import (
-    get_namespace_infos,
     delete_a_pod,
     get_last_error_event_from_pod,
 )
@@ -15,6 +16,8 @@ from lifeguard_openai.infrastructure.prompt import execute_prompt
 
 from bot_handlers import valid_request
 from custom_settings import PROMPT_LANG
+
+NAMESPACE = "summit"
 
 
 current_directory = dirname(abspath(__file__))
@@ -24,15 +27,27 @@ with open(join(current_directory, "cluster.yaml")) as file:
 
 def restart_pod(update, pod_name):
     logger.info("restart pod %s", pod_name)
-    delete_a_pod("diegorubindev", pod_name)
+    delete_a_pod(NAMESPACE, pod_name)
     update.message.reply_text(f"reiniciando pod {pod_name}")
+
+
+def shutdown_deployment(update, deployment):
+    logger.info("shutdown deployment %s", deployment)
+    scale_a_deployment(NAMESPACE, deployment, 0)
+    update.message.reply_text(f"desligando a aplicacao {deployment}")
+
+
+def start_deployment(update, deployment):
+    logger.info("start deployment %s", deployment)
+    scale_a_deployment(NAMESPACE, deployment, 1)
+    update.message.reply_text(f"ligando a aplicacao {deployment}")
 
 
 def explain_pod_error(update, pod_name):
     logger.info("explain pod error %s", pod_name)
     response = execute_prompt(
         CONTEXT["explain_pod_error_prompt_template"][PROMPT_LANG].replace(
-            "ERROR", get_last_error_event_from_pod("diegorubindev", pod_name)
+            "ERROR", str(get_last_error_event_from_pod(NAMESPACE, pod_name))
         )
     )
     update.message.reply_text(response)
@@ -51,10 +66,17 @@ def _execute_commands(update, response):
 
 
 def _build_infos(namespace_infos):
-    infos = ["nome,status,restarts"]
+    infos = ["lista de pods", "pod,status,restarts"]
     for pod in namespace_infos["pods"]:
         infos.append(
             f"{pod['name']},{pod['status']},{pod['containers'][0]['restart_count']}"
+        )
+
+    infos.append("lista de deployments")
+    infos.append("deployment,replicas,ready replicas,unavailable replicas")
+    for deployment in namespace_infos["deployments"]:
+        infos.append(
+            f"{deployment['name']},{deployment['replicas']},{deployment['ready_replicas']},{deployment['unavailable_replicas']}"
         )
 
     return "\n".join(infos)
@@ -70,7 +92,7 @@ def cluster(update, _context):
         return
     question = update.message.to_dict()["text"].replace("/cluster ", "")
 
-    namespace_infos = get_namespace_infos("diegorubindev")
+    namespace_infos = get_namespace_infos(NAMESPACE)
 
     prompt = (
         CONTEXT["prompt_template"][PROMPT_LANG]

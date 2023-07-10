@@ -5,18 +5,20 @@ explain_pod_error_prompt_template:
     ERROR
 prompt_template:
   pt_br: |
-    Imagine que voce seja o meu cluster.
+    Haja como se voce fosse um cluster kubernetes.
+    Entenda deployment como sinonimo de aplicação.
+
+    Contexto
     Todas as informações que você precisa estão abaixo:
     INFOS
 
-    Atualmente temos dois comandos disponíveis restart e explain.
+    Temos quatro comandos disponíveis: start, shutdown, restart e explain.
     Não deduza outros.
     Aqui estão os comandos que você pode utilizar:
 
     COMMANDS
 
-    Não utilize nenhum comando utilizando kubectl.
-
+    Dado o contexto faça, ou reponda, o seguinte:
     QUESTION
 commands:
   - command: "restart pod"
@@ -25,3 +27,9 @@ commands:
   - command: "explain pod error"
     definitions:
       pt_br: "Se você precisar explicar o motivo de algum erro ou porque a pod não está funcionando corretamente, escreva o seguinte, trocando o NOME_DA_POD pela pod informada:\nCOMMAND: explain pod error NOME_DA_POD"
+  - command: "shutdown deployment"
+    definitions:
+      pt_br: "Se você precisar desligar uma aplicação, escreva o seguinte, trocando o NOME_DO_DEPLOYMENT pelo deployment informado:\nCOMMAND: shutdown deployment NOME_DO_DEPLOYMENT"
+  - command: "start deployment"
+    definitions:
+      pt_br: "Se você precisar ligar uma aplicação, escreva o seguinte, trocando o NOME_DO_DEPLOYMENT pelo deployment informado:\nCOMMAND: start deployment NOME_DO_DEPLOYMENT"
