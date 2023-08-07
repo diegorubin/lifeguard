@@ -37,28 +37,6 @@ def baixando_o_nivel_presentation():
 
 
 @validation(
-    description="linguagens funcionais presentation",
-    actions=[save_result_into_database],
-    schedule={"every": {"minutes": 5}},
-    settings={"notification": NOTIFICATION_SETTINGS},
-)
-def linguagens_funcionais_presentation():
-    return simple_http_validation(
-        "https://linguagens-funcionais.diegorubin.dev",
-    )
-
-
-@validation(
-    description="ruby para criativos presentation",
-    actions=[save_result_into_database],
-    schedule={"every": {"minutes": 5}},
-    settings={"notification": NOTIFICATION_SETTINGS},
-)
-def ruby_para_criativos_presentation():
-    return simple_http_validation("https://ruby-para-criativos.diegorubin.dev")
-
-
-@validation(
     description="urlshortener",
     actions=[save_result_into_database],
     schedule={"every": {"minutes": 5}},
