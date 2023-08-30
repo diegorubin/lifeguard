@@ -17,6 +17,7 @@ NOTIFICATION_SETTINGS = {
 
 
 @validation(
+    group="site",
     description="status page",
     actions=[save_result_into_database, notify_in_thread],
     schedule={"every": {"minutes": 5}},
@@ -27,6 +28,7 @@ def status_page():
 
 
 @validation(
+    group="site",
     description="baixando o nivel presentation",
     actions=[save_result_into_database],
     schedule={"every": {"minutes": 5}},
@@ -37,6 +39,7 @@ def baixando_o_nivel_presentation():
 
 
 @validation(
+    group="site",
     description="urlshortener",
     actions=[save_result_into_database],
     schedule={"every": {"minutes": 5}},
