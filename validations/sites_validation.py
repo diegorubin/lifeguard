@@ -29,17 +29,6 @@ def status_page():
 
 @validation(
     group="site",
-    description="baixando o nivel presentation",
-    actions=[save_result_into_database],
-    schedule={"every": {"minutes": 5}},
-    settings={"notification": NOTIFICATION_SETTINGS},
-)
-def baixando_o_nivel_presentation():
-    return simple_http_validation("https://baixando-o-nivel.diegorubin.dev")
-
-
-@validation(
-    group="site",
     description="urlshortener",
     actions=[save_result_into_database],
     schedule={"every": {"minutes": 5}},
