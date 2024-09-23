@@ -1,10 +1,7 @@
-FROM python:3.7-buster
+FROM fedora:42
 
-RUN curl -LsS -O https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
-RUN bash mariadb_repo_setup --mariadb-server-version=10.9
 
-RUN apt-get update -y
-RUN apt-get upgrade -y
+RUN dnf install -y python3 python3-pip python3-devel gcc mariadb-devel rust cargo
 
 RUN mkdir /application
 WORKDIR /application
