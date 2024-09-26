@@ -1,4 +1,4 @@
-FROM fedora:42
+FROM fedora:40
 
 
 RUN dnf install -y python3 python3-pip python3-devel gcc mariadb-devel rust cargo
