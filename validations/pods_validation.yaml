@@ -1,6 +1,6 @@
 validations:
-  - validation_name: "validation_diegorubindev_pods"
-    description: "diegorubindev-namespace-pods"
+  - validation_name: "validation_database_pods"
+    description: "database-namespace-pods"
     actions:
       - lifeguard_openai.actions.errors.explain_error
       - lifeguard.actions.database.save_result_into_database
@@ -23,4 +23,4 @@ validations:
     execute:
       command: lifeguard_k8s.validations.pods.pods_validation
       args:
-        - "diegorubindev"
+        - "database"
