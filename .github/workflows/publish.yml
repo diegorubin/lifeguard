@@ -36,4 +36,4 @@ jobs:
           workflow: 29684009
           repo: diegorubin/diegorubindev-projects
           token: ${{ secrets.PERSONAL_TOKEN }}
-          inputs: '{ "application": "lifeguard", "imageTag": "${{ steps.time.outputs.time }}" }'
+          inputs: '{ "valuesFile": "charts/base/values/observability.yaml", "imageTag": "${{ steps.time.outputs.time }}", "imageRepository": "diegorubin/lifeguard" }'
